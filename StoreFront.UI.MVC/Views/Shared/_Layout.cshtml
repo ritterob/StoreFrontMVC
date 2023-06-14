@@ -1,50 +1,176 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StoreFront.UI.MVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/StoreFront.UI.MVC.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StoreFront.UI.MVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="/img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="/css/mdb.min.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+        <!-- Container wrapper -->
         <div class="container">
-            &copy; 2023 - StoreFront.UI.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <!-- Toggle button -->
+            <button class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent1"
+                    aria-controls="navbarSupportedContent1"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-sm-0" href="https://mdbootstrap.com/">
+                    <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                         height="20"
+                         alt="MDB Logo"
+                         loading="lazy" />
+                </a>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link " href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mdbootstrap.com/docs/standard/">About MDB</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mdbootstrap.com/docs/standard/getting-started/installation/">Free download</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mdbootstrap.com/education/bootstrap/">Free tutorials</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                <!-- Icon -->
+                <a class="nav-link me-3" href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+
+                <a class="nav-link me-3" href="#">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="nav-link me-3" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded px-2 nav-link"
+                   target="_blank">
+                    <i class="fab fa-github me-2"></i>MDB GitHub
+                </a>
+            </div>
+            <!-- Right elements -->
+
         </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+    @RenderBody()
+
+    <footer class="text-center text-white mt-4" style="background-color: #607D8B">
+
+        <!--Call to action-->
+        <div class="pt-4 pb-2">
+            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">
+                Download MDB
+                <i class="fas fa-download ms-2"></i>
+            </a>
+            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">
+                Start free tutorial
+                <i class="fas fa-graduation-cap ms-2"></i>
+            </a>
+        </div>
+        <!--/.Call to action-->
+
+        <hr class="text-dark">
+
+        <div class="container">
+            <!-- Section: Social media -->
+            <section class="mb-3">
+
+                <!-- Facebook -->
+                <a class="btn-link btn-floating btn-lg text-white"
+                   href="#!"
+                   role="button"
+                   data-mdb-ripple-color="dark">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <!-- Twitter -->
+                <a class="btn-link btn-floating btn-lg text-white"
+                   href="#!"
+                   role="button"
+                   data-mdb-ripple-color="dark">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <!-- Google -->
+                <a class="btn-link btn-floating btn-lg text-white"
+                   href="#!"
+                   role="button"
+                   data-mdb-ripple-color="dark">
+                    <i class="fab fa-google"></i>
+                </a>
+
+                <!-- Instagram -->
+                <a class="btn-link btn-floating btn-lg text-white"
+                   href="#!"
+                   role="button"
+                   data-mdb-ripple-color="dark">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <!-- YouTube -->
+                <a class="btn-link btn-floating btn-lg text-white"
+                   href="#!"
+                   role="button"
+                   data-mdb-ripple-color="dark">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <!-- Github -->
+                <a class="btn-link btn-floating btn-lg text-white"
+                   href="#!"
+                   role="button"
+                   data-mdb-ripple-color="dark">
+                    <i class="fab fa-github"></i>
+                </a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #E0E0E0">
+            &copy; @DateTime.Now.Year Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </body>
 </html>
