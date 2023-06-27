@@ -1,6 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> signInManager
+
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -8,19 +15,15 @@
     <!-- MDB icon -->
     <link rel="icon" href="/img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <!-- Google Fonts Roboto -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-    />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <!-- MDB -->
     <link rel="stylesheet" href="/css/mdb.min.css" />
-  </head>
-  <body>
+</head>
+<body>
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
         <!-- Container wrapper -->
@@ -51,126 +54,168 @@
                         <a class="nav-link " href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://mdbootstrap.com/docs/standard/">About MDB</a>
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://mdbootstrap.com/docs/standard/getting-started/installation/">Free download</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://mdbootstrap.com/education/bootstrap/">Free tutorials</a>
-                    </li>
-                </ul>
-                <!-- Left links -->
-            </div>
-            <!-- Collapsible wrapper -->
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-                <!-- Icon -->
-                <a class="nav-link me-3" href="#">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                </a>
+                    @if (User.IsInRole("Admin")) {
+                        //Only displays the HTML inside of these curly braces when a user is logged in with the Admin role
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <span class="nav-label">
+                                    Admin
+                                    <span class="caret"></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("ListUsers", "Administration")">Users</a></li>
+                                <li><a href="@Url.Action("ListRoles", "Administration")">Roles</a></li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Suppliers")">Suppliers</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Categories")">Categories</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "OrderProducts")">Products in Orders</a>
+                                </li>
+                            </ul>
+                        </li>
 
+                    }
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Products">
+                            Shop
+                        </a>
+                    </li>
+
+                    @if (signInManager.IsSignedIn(User)) {
+                        //checks to make sure that someone is logged in if they are to view this HTML
+                        //FOR THIS TO WORK, refer to the 2 lines at the top of this view.
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="Orders">
+                                Orders
+                            </a>
+                        </li>
+                    }
+
+                    <partial name="_LoginPartial" />
+
+
+                </ul>
+                    <!-- Left links -->
+            </div>
+                <!-- Collapsible wrapper -->
+                <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                    <!-- Icon -->
                 <a class="nav-link me-3" href="#">
-                    <i class="fab fa-facebook-f"></i>
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    </a>
+
+                            @*                <a class="nav-link me-3" href="#">
+                <i class="fab fa-facebook-f"></i>
                 </a>
                 <a class="nav-link me-3" href="#">
-                    <i class="fab fa-twitter"></i>
+                <i class="fab fa-twitter"></i>
                 </a>
                 <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded px-2 nav-link"
-                   target="_blank">
-                    <i class="fab fa-github me-2"></i>MDB GitHub
+                target="_blank">
+                <i class="fab fa-github me-2"></i>MDB GitHub
+                </a>*@
+                </div>
+                <!-- Right elements -->
+
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+                        @RenderBody()
+
+        <footer class="text-center text-white mt-4" style="background-color: #607D8B">
+
+            <!--Call to action-->
+            <div class="pt-4 pb-2">
+                <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">
+                    Download MDB
+                    <i class="fas fa-download ms-2"></i>
+                </a>
+                <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">
+                    Start free tutorial
+                    <i class="fas fa-graduation-cap ms-2"></i>
                 </a>
             </div>
-            <!-- Right elements -->
+            <!--/.Call to action-->
 
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
+            <hr class="text-dark">
 
-    @RenderBody()
+            <div class="container">
+                <!-- Section: Social media -->
+                <section class="mb-3">
 
-    <footer class="text-center text-white mt-4" style="background-color: #607D8B">
+                    <!-- Facebook -->
+                    <a class="btn-link btn-floating btn-lg text-white"
+                       href="#!"
+                       role="button"
+                       data-mdb-ripple-color="dark">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
 
-        <!--Call to action-->
-        <div class="pt-4 pb-2">
-            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">
-                Download MDB
-                <i class="fas fa-download ms-2"></i>
-            </a>
-            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">
-                Start free tutorial
-                <i class="fas fa-graduation-cap ms-2"></i>
-            </a>
-        </div>
-        <!--/.Call to action-->
+                    <!-- Twitter -->
+                    <a class="btn-link btn-floating btn-lg text-white"
+                       href="#!"
+                       role="button"
+                       data-mdb-ripple-color="dark">
+                        <i class="fab fa-twitter"></i>
+                    </a>
 
-        <hr class="text-dark">
+                    <!-- Google -->
+                    <a class="btn-link btn-floating btn-lg text-white"
+                       href="#!"
+                       role="button"
+                       data-mdb-ripple-color="dark">
+                        <i class="fab fa-google"></i>
+                    </a>
 
-        <div class="container">
-            <!-- Section: Social media -->
-            <section class="mb-3">
+                    <!-- Instagram -->
+                    <a class="btn-link btn-floating btn-lg text-white"
+                       href="#!"
+                       role="button"
+                       data-mdb-ripple-color="dark">
+                        <i class="fab fa-instagram"></i>
+                    </a>
 
-                <!-- Facebook -->
-                <a class="btn-link btn-floating btn-lg text-white"
-                   href="#!"
-                   role="button"
-                   data-mdb-ripple-color="dark">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
+                    <!-- YouTube -->
+                    <a class="btn-link btn-floating btn-lg text-white"
+                       href="#!"
+                       role="button"
+                       data-mdb-ripple-color="dark">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <!-- Github -->
+                    <a class="btn-link btn-floating btn-lg text-white"
+                       href="#!"
+                       role="button"
+                       data-mdb-ripple-color="dark">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </section>
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #E0E0E0">
+                &copy; @DateTime.Now.Year Copyright:
+                <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <script type="text/javascript" src="/js/mdb.min.js"></script>
+        <!-- Custom scripts -->
+        <script type="text/javascript"></script>
 
-                <!-- Twitter -->
-                <a class="btn-link btn-floating btn-lg text-white"
-                   href="#!"
-                   role="button"
-                   data-mdb-ripple-color="dark">
-                    <i class="fab fa-twitter"></i>
-                </a>
+                        @RenderSection("Scripts", false)
 
-                <!-- Google -->
-                <a class="btn-link btn-floating btn-lg text-white"
-                   href="#!"
-                   role="button"
-                   data-mdb-ripple-color="dark">
-                    <i class="fab fa-google"></i>
-                </a>
-
-                <!-- Instagram -->
-                <a class="btn-link btn-floating btn-lg text-white"
-                   href="#!"
-                   role="button"
-                   data-mdb-ripple-color="dark">
-                    <i class="fab fa-instagram"></i>
-                </a>
-
-                <!-- YouTube -->
-                <a class="btn-link btn-floating btn-lg text-white"
-                   href="#!"
-                   role="button"
-                   data-mdb-ripple-color="dark">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <!-- Github -->
-                <a class="btn-link btn-floating btn-lg text-white"
-                   href="#!"
-                   role="button"
-                   data-mdb-ripple-color="dark">
-                    <i class="fab fa-github"></i>
-                </a>
-            </section>
-            <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #E0E0E0">
-            &copy; @DateTime.Now.Year Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-  </body>
-</html>
+    </body>
+    </html>
